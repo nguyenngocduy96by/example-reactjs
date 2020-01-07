@@ -3,8 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import "./index.css";
 import { type } from "os";
-import Duy from './component/Duy';
-import Board from './component/Board'
+import Board from "./component/Board";
 const App: React.FC = () => {
   return (
     <div>
