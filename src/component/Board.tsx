@@ -2,34 +2,38 @@ import React, { useState } from "react";
 import Square from "./Square";
 import calculateWinner from "./caculationWinner";
 
-function Board() {
-  const [squares, setSquare] = useState(Array(9).fill(null));
-  const [xNext, setxNext] = useState(true);
+// type BoardProps = {
+//   squares: string[];
+//   xNext: boolean;
+//   handleClick(index: number): void;
+// };
+
+const Board: React.FC = () => {
+  const [squares,setSquare] = React.useState(Array(9).fill(null))
+  const [xNext, setxNext] = React.useState(true);
   const winner = calculateWinner(squares);
   let status;
-
-  function HandleClick(i: number) {
-    const _squares = squares.slice();
-    const _xNext = ! xNext;
-    if (calculateWinner(squares) || squares[i]) {
+  function handleClick(index: number) {
+    //const _squares = squares.slice()
+    //const _xNext = !xNext;
+    console.log("squares:", squares);
+    if (calculateWinner(squares) || squares[index]) {
       return;
     }
-    _squares[i] = xNext ? "X" : "O";
-    setSquare(_squares)
-    setxNext(_xNext)
-    console.log(i, squares[i],_squares[i]);
+    squares[index] = xNext ? "X" : "O";
+    setSquare(squares);
+    setxNext(!xNext);
+    console.log(index, squares[index],);
   }
-  
-  function RenderSquare(i: number) {
+
+  const RenderSquare: React.FC<number> = i => {
     return (
       <Square
         value={squares[i]}
-        onClick={() => {
-          HandleClick(i);
-        }}
+        onClick={() => handleClick(i)}
       />
     );
-  }
+  };
   if (winner) {
     status = "Player Win : " + winner;
   } else {
@@ -55,5 +59,5 @@ function Board() {
       </div>
     </div>
   );
-}
+};
 export default Board;

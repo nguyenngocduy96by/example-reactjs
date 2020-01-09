@@ -1,4 +1,3 @@
-import React from "react";
 function calculateWinner(squares: string[]) {
     const lines = [
       [0, 1, 2],
