@@ -1,47 +1,19 @@
 import React, { useState } from "react";
 import Square from "./Square";
 import calculateWinner from "./caculationWinner";
+import { Squares } from "./Game";
 
-// type BoardProps = {
-//   squares: string[];
-//   xNext: boolean;
-//   handleClick(index: number): void;
-// };
+type BoardProps = {
+  squares: Squares;
+  handleClick(index: number): void;
+};
 
-const Board: React.FC = () => {
-  const [squares,setSquare] = React.useState(Array(9).fill(null))
-  const [xNext, setxNext] = React.useState(true);
-  const winner = calculateWinner(squares);
-  let status;
-  function handleClick(index: number) {
-    //const _squares = squares.slice()
-    //const _xNext = !xNext;
-    console.log("squares:", squares);
-    if (calculateWinner(squares) || squares[index]) {
-      return;
-    }
-    squares[index] = xNext ? "X" : "O";
-    setSquare(squares);
-    setxNext(!xNext);
-    console.log(index, squares[index],);
-  }
-
-  const RenderSquare: React.FC<number> = i => {
-    return (
-      <Square
-        value={squares[i]}
-        onClick={() => handleClick(i)}
-      />
-    );
+const Board: React.FC<BoardProps> = ({ squares, handleClick }) => {
+  const RenderSquare: React.FC<number> = index => {
+    return <Square value={squares[index]} onClick={() => handleClick(index)} />;
   };
-  if (winner) {
-    status = "Player Win : " + winner;
-  } else {
-    status = "Next player: " + (xNext ? "X" : "O");
-  }
   return (
     <div>
-      <div className="status">{status}</div>
       <div className="board-row">
         {RenderSquare(0)}
         {RenderSquare(1)}
