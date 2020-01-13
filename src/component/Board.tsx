@@ -12,23 +12,18 @@ const Board: React.FC<BoardProps> = ({ squares, handleClick }) => {
   const RenderSquare: React.FC<number> = index => {
     return <Square value={squares[index]} onClick={() => handleClick(index)} />;
   };
+  var board_row = [];
+  for (var index = 0; index < 9; index++) {
+    if (index % 3 == 0) board_row.push(<div className="board-row"></div>);
+    board_row.push(
+      <span className="indent" key={index}>
+        {RenderSquare(index)}
+      </span>
+    );
+  }
   return (
     <div>
-      <div className="board-row">
-        {RenderSquare(0)}
-        {RenderSquare(1)}
-        {RenderSquare(2)}
-      </div>
-      <div className="board-row">
-        {RenderSquare(3)}
-        {RenderSquare(4)}
-        {RenderSquare(5)}
-      </div>
-      <div className="board-row">
-        {RenderSquare(6)}
-        {RenderSquare(7)}
-        {RenderSquare(8)}
-      </div>
+      {board_row}
     </div>
   );
 };
