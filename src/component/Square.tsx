@@ -5,15 +5,15 @@ type SquareProps = {
   onClick: () => void;
 };
 
-const Square:React.FC<SquareProps> = props => {
+const Square:React.FC<SquareProps> = ({ value, onClick }) => {
   return (
     <button
-      className="square"
+      className={value === 'X' ? 'square color-red' : 'square color-blue'}
       onClick={() => {
-        props.onClick();
+        onClick();
       }}
     >
-      {props.value}
+      {value}
     </button>
   );
 }

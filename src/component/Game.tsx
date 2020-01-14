@@ -3,12 +3,10 @@ import Board from "./Board";
 import calculateWinner from "./caculationWinner";
 
 export type Squares = string[];
-
-type GameProps = {
-  onClick: () => void;
-};
 const Game: React.FC = () => {
   const [xNext, setxNext] = React.useState(true);
+  const [coorX,setcoorX] = React.useState(0)
+  const [coorY,setcoorY] = React.useState(0)
   const [history, setHistory] = React.useState<Squares[]>([
     Array(9).fill(null)
   ]);
@@ -46,6 +44,9 @@ const Game: React.FC = () => {
     setHistory(_history);
     setStepNumber(stepNumber + 1);
     setxNext(!xNext);
+    setcoorX(Math.floor(index / 3));
+    setcoorY(index % 3);
+    console.log(coorX,coorY)
   };
 
   const callback = (index: number) => {};
@@ -77,6 +78,7 @@ const Game: React.FC = () => {
       </div>
       <div className="game-info">
         <div>{status}</div>
+        <div>coordinates:{coorX},{coorY}</div>
         <ol>{moves}</ol>
       </div>
     </div>

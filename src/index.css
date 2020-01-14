@@ -31,6 +31,12 @@ ol, ul {
   text-align: center;
   width: 34px;
 }
+.color-red{
+  color : red
+}
+.color-blue{
+  color: blue
+}
 
 .square:focus {
   outline: none;

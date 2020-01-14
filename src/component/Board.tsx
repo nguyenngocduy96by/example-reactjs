@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Square from "./Square";
-import calculateWinner from "./caculationWinner";
 import { Squares } from "./Game";
 
 type BoardProps = {
@@ -9,21 +8,22 @@ type BoardProps = {
 };
 
 const Board: React.FC<BoardProps> = ({ squares, handleClick }) => {
-  const RenderSquare: React.FC<number> = index => {
+  const renderSquare = (index:number) => {
     return <Square value={squares[index]} onClick={() => handleClick(index)} />;
   };
-  var board_row = [];
-  for (var index = 0; index < 9; index++) {
-    if (index % 3 == 0) board_row.push(<div className="board-row"></div>);
-    board_row.push(
-      <span className="indent" key={index}>
-        {RenderSquare(index)}
-      </span>
-    );
-  }
+  var boardRow = Array(9).fill(0);
   return (
     <div>
-      {board_row}
+      {boardRow.map(function(name, index) {
+        return index % 3 !== 0 ? (
+          <span key={index}>{renderSquare(index)}</span>
+        ) : (
+          <React.Fragment>
+            <div className="boardRow"></div>
+            <span key={index}>{renderSquare(index)}</span>
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 };
